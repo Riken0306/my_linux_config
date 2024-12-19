@@ -1,5 +1,7 @@
 # Linux Configs                                                                                                                                                                                                      
 
+![My Linux Setup](./my_linux_setup.png)
+
 ## Programs
 
 ### Alacritty
