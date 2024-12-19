@@ -1,0 +1,117 @@
+" Disable compatibility with vi which can cause unexpected issues.
+set nocompatible
+
+" Enable type file detection. Vim will be able to try to detect the type of file in use.
+filetype on
+
+" Enable plugins and load plugin for the detected file type.
+filetype plugin on
+
+" Load an indent file for the detected file type.
+filetype indent on
+
+" Turn syntax highlighting on.
+syntax on
+
+" Add numbers to each line on the left-hand side.
+set number
+
+" Highlight cursor line underneath the cursor horizontally.
+set cursorline
+hi CursorLine cterm=NONE
+highlight CursorLine ctermbg=238
+highlight CursorLineNr NONE ctermfg=226
+
+" Set shift width to 4 spaces.
+set shiftwidth=4
+
+" Set tab width to 4 columns.
+set tabstop=4
+
+" Use space characters instead of tabs.
+" set expandtab
+
+set noexpandtab
+
+" Do not save backup files.
+set nobackup
+
+" Do not let cursor scroll below or above N number of lines when scrolling.
+set scrolloff=10
+
+" Do not wrap lines. Allow long lines to extend as far as the line goes.
+set nowrap
+
+" While searching though a file incrementally highlight matching characters as you type.
+set incsearch
+
+" Ignore capital letters during search.
+set ignorecase
+
+" Override the ignorecase option if searching for capital letters.
+" This will allow you to search specifically for capital letters.
+set smartcase
+
+" Show partial command you type in the last line of the screen.
+set showcmd
+
+" Show the mode you are on the last line.
+set showmode
+
+" Show matching words during a search.
+set showmatch
+
+" Use highlighting when doing a search.
+set hlsearch
+
+" Set the commands to save in history default number is 20.
+set history=1000
+
+set wildmenu
+
+set wildmode=list:longest
+
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+set tags=./tags,tags;$HOME
+
+" To get the filename in vim
+set modeline
+set ls=2
+
+" Add Filename to Terminal Title
+set title
+
+" Copy(Ctrl+c) and Paste(Ctrl+p) between different vim terminals 
+vmap <C-c> :w! ~/.vbuf<CR> 
+nmap <C-c> :.w! ~/.vbuf<CR>
+nmap <C-p> :r ~/.vbuf<CR>
+vnoremap p "_dP
+
+" Status line
+set statusline+=\ \ \%<%f
+set statusline+=\ %{&modified?'[+]':''}
+set statusline+=%=
+set statusline+=\ %-4(%y%)
+set statusline+=\ %-8{%(&encoding)%}
+set statusline+=\ \ %-5(%l:%c%)
+set statusline+=\ %-4(%LL%)
+set statusline+=\ \ %P
+highlight statusline NONE ctermbg=238 cterm=bold 
+
+" NetRw File Tree
+inoremap <c-b> <Esc>:Lex<cr>:vertical resize 40<cr>
+nnoremap <c-b> <Esc>:Lex<cr>:vertical resize 40<cr>
+
+" Terminal Mode
+set splitbelow
+set splitright
+" set modifiable
+" set write
+nnoremap <F4> <Esc>:term zsh<cr><c-\><c-n>:resize -5<cr>i
+tnoremap <Esc> <c-\><c-n>:set nonumber<cr>
+nnoremap <c-j> :q!<cr>
+
+" Grep
+nnoremap <c-h> :grep -F "<C-R><C-W>" **/*c **/*h<CR>:copen<CR>:resize 10<CR>
+

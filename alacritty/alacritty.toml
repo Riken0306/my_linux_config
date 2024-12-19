@@ -1,0 +1,27 @@
+general.import = [
+   "~/.config/alacritty/catppuccin-macchiato.toml"
+]
+
+[font]
+size = 11.0
+
+[font.bold]
+family = "Monospace"
+style = "Bold"
+
+[font.bold_italic]
+family = "Monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "Monospace"
+style = "Italic"
+
+[font.normal]
+family = "Monospace"
+style = "Regular"
+
+[terminal]
+
+[terminal.shell]
+program = "/usr/bin/zsh"
