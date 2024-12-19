@@ -1,6 +1,6 @@
 # Linux Configs                                                                                                                                                                                                      
 
-![My Linux Setup](./my_linux_setup.png)
+![My Linux Setup](https://github.com/Riken0306/my_linux_config/blob/main/Screenshots/my_linux_setup.png)
 
 ## Programs
 
