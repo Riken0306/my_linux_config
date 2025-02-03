@@ -7,10 +7,15 @@ void generate_ascii_art(const char* word) {
   //Construct the command to call figlet with the provided word
   snprintf(command, sizeof(command), "figlet \"%s\"", word);
   system(command);
-  
+
   // Specify the font (slant) for an italicized effect
   snprintf(command, sizeof(command), "figlet -f slant \"%s\"", word);
   system(command);
+
+    // Specify the font (shadow) for an shadow effect
+  snprintf(command, sizeof(command), "figlet -f slant \"%s\"", word);
+  system(command);
+
 }
 
 int main() {
