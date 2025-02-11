@@ -1,5 +1,18 @@
+#  _____  _____ __  ______  ______
+# /__  / / ___// / / / __ \/ ____/
+#   / /  \__ \/ /_/ / /_/ / /
+#  / /_____/ / __  / _, _/ /___
+# /____/____/_/ /_/_/ |_|\____/
 
+# ZSH Config Path[also defined in ~/.bash_profile]
 export ZDOTDIR=$HOME/.config/zsh
+
+# Set up zoxide - An Alternative of cd
+eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+# Useful Functions
+source "$ZDOTDIR/zsh-functions"
 
 #    ______                      __     __  _
 #   / ____/___  ____ ___  ____  / /__  / /_(_)___  ____  _____
@@ -7,20 +20,22 @@ export ZDOTDIR=$HOME/.config/zsh
 # / /___/ /_/ / / / / / / /_/ / /  __/ /_/ / /_/ / / / (__  )
 # \____/\____/_/ /_/ /_/ .___/_/\___/\__/_/\____/_/ /_/____/
 #                     /_/
+zsh_add_plugin "Aloxaf/fzf-tab"
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}'
 zstyle ':completion:*' menu select
 # zstyle ':completion:*' menu select completer _expand _complete _ignored
-zstyle :compinstall filename '/home/rishav/.config/zsh/zshrc'
+zstyle :compinstall filename '/home/rikenprajapati/.config/zsh/zshrc'
 
-_comp_options+=(globdots)               # Include hidden files
+_comp_options+=(globdots)  #Include hidden files
 autoload -Uz compinit
 zmodload zsh/complist
 compinit
 
-#
+autoload -U compinit; compinit
+
 #     __  ___      __
 #    / / / (_)____/ /_____  _______  __
 #   / /_/ / / ___/ __/ __ \/ ___/ / / /
@@ -31,7 +46,7 @@ compinit
 HISTFILE=$ZDOTDIR/zsh_history
 HISTSIZE=10000
 SAVEHIST=1000000
-setopt appendhistory        # Will be helpful if multiple settions are open
+setopt appendhistory        # Will be helpful if multiple sessions are open
 setopt sharehistory
 setopt hist_ignore_dups     # Dont store same command in history
 setopt hist_ignore_all_dups
@@ -45,7 +60,6 @@ setopt hist_find_no_dups
 # / /_/ / /_/ / /_/ / /_/ / / / (__  )
 # \____/ .___/\__/_/\____/_/ /_/____/
 #     /_/
-#[https://zsh.sourceforge.io/Doc/Release/Options.html]
 
 setopt nomatch
 setopt auto_cd              # Automatically cd into typed directory.
@@ -60,8 +74,6 @@ zle_highlight=('paste:none')
 # Colors
 autoload -Uz colors && colors
 
-# Useful Functions
-source "$ZDOTDIR/zsh-functions"
 
 # Normal files to source
 zsh_add_file "zsh-vim-mode"
@@ -75,9 +87,6 @@ zsh_add_plugin "hlissner/zsh-autopair"
 # beeping is annoying
 unsetopt BEEP
 
-#export MANPAGER='nvim +Man!'
-#export MANWIDTH=999
-
 
 #     ____  _           ___
 #    / __ )(_)___  ____/ (_)___  ____ ______
@@ -86,54 +95,51 @@ unsetopt BEEP
 # /_____/_/_/ /_/\__,_/_/_/ /_/\__, /____/
 #                             /____/
 
+# Move in pattern-match-history with up and down arrow
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
-
-# Key-bindings
-# bindkey -s '^n' 'vim $(fzf)^M'
-# bindkey '^[[P' delete-char
-# bindkey "^p" up-line-or-beginning-search # Up
-# bindkey "^n" down-line-or-beginning-search # Down
-# bindkey "^k" up-line-or-beginning-search # Up
-# bindkey "^j" down-line-or-beginning-search # Down
+bindkey '^[[A' up-line-or-beginning-search  # Up arrow
+bindkey '^[[B' down-line-or-beginning-search  # Down arrow
 
 # Move with ctrl + arrows
 bindkey '^[[1;5C' forward-word          # ctrl right arrow
 bindkey '^[[1;5D' backward-word         # ctrl left arrow
 bindkey '^H'      backward-delete-word  # ctrl Backspace
 bindkey '^[[3;5~' delete-word           # ctrl Delete
-# bindkey '^[[3;~'  delete-char           # ctrl Delete
-# bindkey '^L'      clear-screen          # ctrl Shift L
+bindkey '^[[3;~'  delete-char           # ctrl Delete
+
+# Helps
+bindkey '^T'      tldr_current_command
 bindkey '^K'      run-help              # eg. foo --> man foo
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Open File Manager in current directory
-bindkey -s '^@' 'yazi^M'
-
 # Search packages in Package manager
-bindkey -s '^p' 'pacinstall^M'
-# bindkey -s '^y' 'yayinstall^M'
-#bindkey -s '^a' 'aptinstall^M'
+#bindkey -s '^a' 'pacinstall^M'
+# bindkey -s '^a' 'yayinstall^M'
+bindkey -s '^a' 'aptinstall^M'
 
-# Use lf to switch directories and bind it to ctrl-o
+# Yazi - Termonal File Manager
 bindkey -s '^y' 'y^M'
 
-# bindkey -s '^a' 'bc -lq^M'
-bindkey -s '^f' 'cd "$(dirname "$(fzf)")"^M'
+# Trigger zoxide fzf with Ctrl+z
+bindkey -s '^z' 'zi^M'
 
-# Serial Monitor
-bindkey -s '^b' 'cu --line /dev/ttyUSB0 --speed 115200^M'
+#Open File/Directory in nvim 
+bindkey -s '^N' 'vim $(fzf)^M'
 
-#     _    _ _
-#    / \  | (_) __ _ ___  ___  ___
-#   / _ \ | | |/ _` / __|/ _ \/ __|
-#  / ___ \| | | (_| \__ \  __/\__ \
-# /_/   \_\_|_|\__,_|___/\___||___/
+# Open Serial Terminal
+bindkey -s '^b' 'sudo cu -l /dev/ttyUSB0 -s 115200^M'
+
+#     ___    ___
+#    /   |  / (_)___ _________  _____
+#   / /| | / / / __ `/ ___/ _ \/ ___/
+#  / ___ |/ / / /_/ (__  )  __(__  )
+# /_/  |_/_/_/\__,_/____/\___/____/
 
 # Common
 alias vim="nvim"
@@ -144,7 +150,6 @@ alias c="clear"
 
 # ls
 alias ls="exa -h --color=automatic --icons --group-directories-first"
-#alias ls="ls --color=auto"
 alias l="ls -F"\
     ll="ls -laF "\
     la="ls -aF"\
@@ -154,9 +159,8 @@ alias l="ls -F"\
 # cd
 alias ..="cd .."\
     ...="cd ../.."\
-    ....="cd ../../.."
-
-#alias s="kitten ssh"
+    ....="cd ../../.."\
+    -="cd -"
 
 # git
 alias g="git"\
@@ -169,17 +173,70 @@ alias g="git"\
 # fzf search
 alias gl="git log --oneline | fzf --multi --preview 'git show {+1}'"
 
-# Django
-#alias pm="python manage.py"
-
 #zsh
 alias zconf="nvim ~/.config/zsh"
 alias zref="source ~/.config/zsh/.zshrc"
 
-#nconf
+#Vim config
+alias vconf="vi ~/.vimrc"
+
+#neovim config
 alias nconf="nvim ~/.config/nvim"
+alias vim=nvim
+
+#cat
+#alias cat="bat"
+
+#Serial Terminal
+alias cu="sudo cu -l /dev/ttyUSB0 -s 115200"
+
+#scripts
+alias exp_scripts="cd ~/Workspace/Development/scripts"
+
+#syslog
+alias syslog="~/Workspace/Development/Syslog_Utility/syslog.out"
+
+#se_login ssh/telnet
+alias se_login="~/Workspace/Development/scripts/se_login.exp"
+alias se_login_telnet="~/Workspace/Development/scripts/se_login_telnet.exp"
+
+#     ______                      __
+#    / ____/  ______  ____  _____/ /______
+#   / __/ | |/_/ __ \/ __ \/ ___/ __/ ___/
+#  / /____>  </ /_/ / /_/ / /  / /_(__  )
+# /_____/_/|_/ .___/\____/_/   \__/____/
+#           /_/
 
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR=nvim
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999
+
+#NRF
+#export PATH=$PATH:/usr/local/gcc-arm-none-eabi-7-2018-q2-update/bin
+
+#ACTA
+export PATH=$PATH:/opt/rv1126_argo-fr/host/bin
+export PATH=$PATH:/opt/am335x_CosecARGO/host/usr/bin
+export PATH=$PATH:/opt/am335x_CosecVEGA/host/usr/bin
+export PATH=$PATH:/opt/am335x_CosecPATHV2/host/usr/bin
+export PATH=$PATH:/opt/am335x_CosecARCV2/host/usr/bin
+export PATH=$PATH:/opt/am335x_panel_lite/host/usr/bin
+export PATH=$PATH:/opt/GateController/host/usr/bin
+
+#Telecom
+export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin
+export VP210_EXT_PRODUCT_SRC_PATH=/home/rikenprajapati/svn_home/Matrix_Projects/Telecom/IP_Terminals/SWD/Extended_Phones/Sparsh_VP210/Trunk/Source
+export PATH=$PATH:/opt/dspg/v2.5.0-rc2/sysroots/x86_64-dspg-linux/usr/bin/arm-dspg-linux-musleabi/
+#export STAGING_DIR=/opt/staging_dir
+#export PATH=$PATH:/opt/staging_dir/toolchain-arm_v7-a_gcc-4.5-linaro_glibc-2.14.1_eabi/bin
+STAGING_DIR=/opt/staging_dir
+export STAGING_DIR
+PATH=$PATH:/opt/staging_dir/toolchain-arm_v7-a_gcc-4.5-linaro_glibc-2.14.1_eabi/bin
+export PATH
+
+#Source SVN-Credentials
+source "$ZDOTDIR/zsh-svn"
 
 #     _______   ______
 #    / ____/ | / / __ \

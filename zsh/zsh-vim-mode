@@ -1,4 +1,10 @@
-# bindkey -e will be emacs mode
+#  _    ________  ___   __  _______  ____  ______
+# | |  / /  _/  |/  /  /  |/  / __ \/ __ \/ ____/
+# | | / // // /|_/ /  / /|_/ / / / / / / / __/
+# | |/ // // /  / /  / /  / / /_/ / /_/ / /___
+# |___/___/_/  /_/  /_/  /_/\____/_____/_____/
+
+# bindkey -v will be vim mode
 bindkey -v
 export KEYTIMEOUT=1
 
@@ -9,7 +15,7 @@ bindkey -M menuselect '^l' vi-forward-char
 bindkey -M menuselect '^j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
-# Change cursor shape for different vi modes.
+# Change cursor shape for different vim modes.
 function zle-keymap-select () {
     case $KEYMAP in
         vicmd) echo -ne '\e[1 q';;      # block
@@ -18,7 +24,7 @@ function zle-keymap-select () {
 }
 zle -N zle-keymap-select
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    zle -K viins # initiate `vim insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
     echo -ne "\e[5 q"
 }
 zle -N zle-line-init
