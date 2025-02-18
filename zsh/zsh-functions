@@ -83,11 +83,3 @@ function tldr_current_command() {
 zle -N tldr_current_command
 
 
-function svn-co() {
-#  if [$1 == "100"]; then
-#    svn checkout svn://192.168.100.5/$2 ~/svn_home/$2
-#  else
-    svn checkout svn://192.168.101.20/Matrix_Projects/$1 ~/svn_home/Matrix_Projects/$1
-#  fi
-    
-}

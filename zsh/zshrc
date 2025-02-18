@@ -129,7 +129,7 @@ bindkey -s '^y' 'y^M'
 # Trigger zoxide fzf with Ctrl+z
 bindkey -s '^z' 'zi^M'
 
-#Open File/Directory in nvim 
+#Open File/Directory in nvim
 bindkey -s '^N' 'vim $(fzf)^M'
 
 # Open Serial Terminal
@@ -184,8 +184,9 @@ alias vconf="vi ~/.vimrc"
 alias nconf="nvim ~/.config/nvim"
 alias vim=nvim
 
-#cat
-#alias cat="bat"
+#bat
+alias cat="bat --style=header,grid --paging=never --theme=\"Catppuccin Mocha\""
+alias catn="bat --theme=\"Catppuccin Mocha\""
 
 #Serial Terminal
 alias cu="sudo cu -l /dev/ttyUSB0 -s 115200"
@@ -234,6 +235,9 @@ STAGING_DIR=/opt/staging_dir
 export STAGING_DIR
 PATH=$PATH:/opt/staging_dir/toolchain-arm_v7-a_gcc-4.5-linaro_glibc-2.14.1_eabi/bin
 export PATH
+
+#IVA
+export PATH=$PATH:/opt/rv1126_ipc_8mp/host/bin/
 
 #Source SVN-Credentials
 source "$ZDOTDIR/zsh-svn"
