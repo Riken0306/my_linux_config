@@ -15,17 +15,11 @@ end
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-local tree_cb = nvim_tree_config.nvim_tree_callback
-
-nvim_tree.setup {
+nvim_tree.setup({
     disable_netrw = true,
     hijack_netrw = true,
     open_on_setup = false,
-    ignore_ft_on_setup = {
-        "startify",
-        "dashboard",
-        "alpha",
-    },
+    ignore_ft_on_setup = { "startify", "dashboard", "alpha" },
     open_on_tab = false,
     hijack_cursor = false,
     update_cwd = true,
@@ -54,18 +48,7 @@ nvim_tree.setup {
     },
     view = {
         width = 30,
-        height = 30,
-        hide_root_folder = false,
         side = "left",
-        auto_resize = true,
-        mappings = {
-            custom_only = false,
-            list = {
-            { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-            { key = "h", cb = tree_cb "close_node" },
-            { key = "v", cb = tree_cb "vsplit" },
-            },
-        },
         number = false,
         relativenumber = false,
     },
@@ -102,7 +85,23 @@ nvim_tree.setup {
                     empty_open = "",
                     symlink = "",
                 },
-            }
-        }
-    }
-}
+            },
+        },
+    },
+    on_attach = function(bufnr)
+        local api = require("nvim-tree.api")
+
+        local function opts(desc)
+            return { desc = "NvimTree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- Key mappings for nvim-tree
+        vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+        vim.keymap.set("n", "o", api.node.open.edit, opts("Open"))
+        vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
+        vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Node"))
+        vim.keymap.set("n", "v", api.node.open.vertical, opts("Open in Vertical Split"))
+        vim.keymap.set("n", "t", api.node.open.tab, opts("Open in New Tab")) -- New mapping for opening in a tab
+    end,
+})
+

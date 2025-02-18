@@ -69,9 +69,13 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
-keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
-
+-- Telescope
+keymap("n", "<leader>f", "<cmd>Telescope live_grep<cr>", opts)
+vim.keymap.set("n", "<leader>k", "<cmd>Telescope find_files<CR>", { noremap = true, silent = true })
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>:NvimTreeResize 40<cr>", opts)
+
+-- ctags
+vim.keymap.set("n", "<Leader>t", "<C-t>", { noremap = true, silent = true })
+-- vim.keymap.set("n", "<Leader>o", "<C-o>", { noremap = true, silent = true })
