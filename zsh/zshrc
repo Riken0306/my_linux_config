@@ -103,6 +103,10 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search  # Up arrow
 bindkey '^[[B' down-line-or-beginning-search  # Down arrow
 
+#Home and End Key
+bindkey "^[[H" beginning-of-line  # Home key
+bindkey "^[[F" end-of-line        # End key
+
 # Move with ctrl + arrows
 bindkey '^[[1;5C' forward-word          # ctrl right arrow
 bindkey '^[[1;5D' backward-word         # ctrl left arrow
@@ -126,8 +130,8 @@ bindkey -s '^a' 'aptinstall^M'
 # Yazi - Termonal File Manager
 bindkey -s '^y' 'y^M'
 
-# Trigger zoxide fzf with Ctrl+z
-bindkey -s '^z' 'zi^M'
+# Trigger zellij fzf with Ctrl+z
+bindkey -s '^z' 'fzf-zellij a^M'
 
 #Open File/Directory in nvim
 bindkey -s '^N' 'vim $(fzf)^M'
@@ -238,6 +242,8 @@ export PATH
 
 #IVA
 export PATH=$PATH:/opt/rv1126_ipc_8mp/host/bin/
+export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
+#export PATH=$PATH:/usr/include/opencv
 
 #Source SVN-Credentials
 source "$ZDOTDIR/zsh-svn"

@@ -82,4 +82,26 @@ function tldr_current_command() {
 }
 zle -N tldr_current_command
 
+function fzf-zellij() {
+    if [ "$1" = "a" ]; then
+        # Get the list of existing zellij sessions
+        local sessions
+        sessions=$(zellij list-sessions | awk '{print $1}' | sed -r 's/\x1B\[[0-9;]*[mK]//g' )
 
+        # Use fzf to select a session
+        local selected_session
+        selected_session=$(echo "$sessions" | fzf --height=40% --layout=reverse  --print-query | tail -n 1)
+
+        # Check if the selected session exists
+        if echo "$sessions" | grep -q "^$selected_session$"; then
+            echo "Attaching to existing session: $selected_session"
+            zellij attach "$selected_session"
+        elif [ -n "$selected_session" ]
+        then
+            echo "Creating and attaching to new session: $selected_session"
+            zellij -s "$selected_session"
+        fi
+    else
+        zellij
+    fi
+}
