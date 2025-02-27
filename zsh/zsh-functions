@@ -88,11 +88,6 @@ function fzf-zellij() {
         local sessions
         sessions=$(zellij list-sessions | awk '{print $1}' | sed -r 's/\x1B\[[0-9;]*[mK]//g' )
 
-        # Check if there are any sessions available
-        if [[ -z "$sessions" ]]; then
-            return 1
-        fi
-
         # Use fzf to select a session
         local selected_session
         selected_session=$(echo "$sessions" | fzf --height=40% --layout=reverse  --print-query | tail -n 1)
