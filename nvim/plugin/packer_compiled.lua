@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/home/rikenprajapati/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["fzf-lua"] = {
+    loaded = true,
+    path = "/home/rikenprajapati/.local/share/nvim/site/pack/packer/start/fzf-lua",
+    url = "https://github.com/ibhagwan/fzf-lua"
+  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/rikenprajapati/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",

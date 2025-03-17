@@ -88,6 +88,8 @@ return packer.startup(function(use)
 
   -- Airline
   use "nvim-lualine/lualine.nvim"
+  use "ibhagwan/fzf-lua"
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

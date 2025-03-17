@@ -19,10 +19,12 @@ else
     require "user.autopairs"
     require "user.comment"
     require 'nvim-tree'.setup()
-    -- require "user.bufferline"
+    require "user.bufferline"
     require "user.lualine"
     -- require "user.indentline"
     vim.loader.enable()
     require "user.alpha"
     require "user.project"
+
+    vim.api.nvim_set_keymap('n', '<C-Tab>', ":lua require('fzf-lua').buffers()<CR>", { noremap = true, silent = true })
 end
