@@ -125,7 +125,7 @@ bindkey '^e' edit-command-line
 # Search packages in Package manager
 #bindkey -s '^a' 'pacinstall^M'
 # bindkey -s '^a' 'yayinstall^M'
-bindkey -s '^a' 'aptinstall^M'
+bindkey -s '^a' 'pkg_search^M'
 
 # Yazi - Termonal File Manager
 bindkey -s '^y' 'y^M'
@@ -153,7 +153,15 @@ alias hgrep="fc -El 0 | grep"
 alias c="clear"
 
 # ls
-alias ls="exa -h --color=automatic --icons --group-directories-first"
+if command -v exa &>/dev/null; then
+    LS_CMD="exa"
+elif command -v eza &>/dev/null; then
+    LS_CMD="eza"
+else
+    LS_CMD="ls"  # Fallback to ls if neither is found
+fi
+
+alias ls="$LS_CMD -h --color=automatic --icons --group-directories-first"
 alias l="ls -F"\
     ll="ls -laF "\
     la="ls -aF"\
@@ -220,15 +228,6 @@ export MANWIDTH=999
 #NRF
 #export PATH=$PATH:/usr/local/gcc-arm-none-eabi-7-2018-q2-update/bin
 
-#ACTA
-export PATH=$PATH:/opt/rv1126_argo-fr/host/bin
-export PATH=$PATH:/opt/am335x_CosecARGO/host/usr/bin
-export PATH=$PATH:/opt/am335x_CosecVEGA/host/usr/bin
-export PATH=$PATH:/opt/am335x_CosecPATHV2/host/usr/bin
-export PATH=$PATH:/opt/am335x_CosecARCV2/host/usr/bin
-export PATH=$PATH:/opt/am335x_panel_lite/host/usr/bin
-export PATH=$PATH:/opt/GateController/host/usr/bin
-
 #Telecom
 export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.03-20130313_linux/bin
 export VP210_EXT_PRODUCT_SRC_PATH=/home/rikenprajapati/svn_home/Matrix_Projects/Telecom/IP_Terminals/SWD/Extended_Phones/Sparsh_VP210/Trunk/Source
@@ -246,7 +245,9 @@ export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig:$PKG_CONFIG_PATH
 #export PATH=$PATH:/usr/include/opencv
 
 #Source SVN-Credentials
-source "$ZDOTDIR/zsh-svn"
+if [[ -f "$ZDOTDIR/zsh-svn" ]]; then
+    source "$ZDOTDIR/zsh-svn"
+fi
 
 #     _______   ______
 #    / ____/ | / / __ \
