@@ -14,7 +14,7 @@ else
     require "user.colorscheme"
     require "user.cmp"
     require "user.lsp"
-    require "user.telescope"
+    -- require "user.telescope"
     require "user.treesitter"
     require "user.autopairs"
     require "user.comment"
@@ -25,6 +25,5 @@ else
     vim.loader.enable()
     require "user.alpha"
     require "user.project"
-
-    vim.api.nvim_set_keymap('n', '<C-Tab>', ":lua require('fzf-lua').buffers()<CR>", { noremap = true, silent = true })
+    require "user.fzf-lua"
 end
