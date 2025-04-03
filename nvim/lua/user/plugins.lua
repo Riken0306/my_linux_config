@@ -90,6 +90,9 @@ return packer.startup(function(use)
   use "nvim-lualine/lualine.nvim"
   use "ibhagwan/fzf-lua"
 
+  -- Multicursor
+  use "vscode-neovim/vscode-multi-cursor.nvim"
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

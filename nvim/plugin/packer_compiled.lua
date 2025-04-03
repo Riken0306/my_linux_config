@@ -243,6 +243,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/rikenprajapati/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
+  },
+  ["vscode-multi-cursor.nvim"] = {
+    loaded = true,
+    path = "/home/rikenprajapati/.local/share/nvim/site/pack/packer/start/vscode-multi-cursor.nvim",
+    url = "https://github.com/vscode-neovim/vscode-multi-cursor.nvim"
   }
 }
 
