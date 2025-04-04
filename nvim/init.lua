@@ -26,6 +26,8 @@ if vim.g.vscode then
     vim.keymap.set({'n', 'x', 'i'}, '<cs-l>', function()
         cursors.selectHighlights()
     end)
+
+	vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
 else
     -- ordinary Neovim
     require "user.options"
