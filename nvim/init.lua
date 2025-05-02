@@ -7,6 +7,8 @@ if vim.g.vscode then
     vim.g.lualine = false
     vim.g.nvim_tree_disable = true
 
+    vim.opt.ignorecase = true;
+
     require('vscode-multi-cursor').setup { -- Config is optional
         -- Whether to set default mappings
         default_mappings = true,
